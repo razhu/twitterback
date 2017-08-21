@@ -2,20 +2,23 @@ var express = require('express');
 var Twitter = require('twitter');
 var models = require('./models');
 var bodyParser = require('body-parser');
+var cors = require('cors')
 
 var app = express();
+
 app.use(bodyParser.json({ limit: '10mb' }));
+app.use(cors())
 var client = new Twitter({
   consumer_key: 'Qml8euMh6wNf68yM6tzY4l6qq',
   consumer_secret: 'AMIRz4GOMK7eLr3EgT7Omxf0Xbkole0iGHozgLctQ3c8ReNPVb',
   access_token_key: '15033587-3Ou2caFP37cswKiMeUuO1HultxcsmaT2ZYMwKBKeQ',
   access_token_secret: 'FVcXZD1tabksftgYxLnSzy60pbBkvuAjYw7clbxFVEcKt'
 });
-let myTweets = []
 // get tweets from twitter
 app.get('/', function(req, res, next) {
   client.get('search/tweets', {q: req.query.q}, function(error, tweets, response) {
-    for(let element of tweets.statuses){
+   let myTweets = [] 
+   for(let element of tweets.statuses){
         let myTweet = {}
         myTweet.tweet_text = element.text
         myTweet.created = element.created_at
