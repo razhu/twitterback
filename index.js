@@ -28,7 +28,7 @@ app.get('/', function(req, res, next) {
         myTweet.location = element.user.location
         myTweets.push(myTweet)
     }
-    res.send(myTweets)
+    res.send(tweets)
   });
 });
 // save tweets
