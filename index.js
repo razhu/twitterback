@@ -25,7 +25,7 @@ app.get('/', function(req, res, next) {
         myTweet.username = element.user.screen_name
         myTweet.name = element.user.name
         myTweet.date = element.user.created_at
-        myTweet.hour = element.user.created_at
+        myTweet.hour = '10:10'
         myTweet.likes = 0 // find out how to obtain
         myTweet.rts = 0 // find out how to obtain
         myTweet.hashtags = element.entities.hashtags.map(x => x.text)

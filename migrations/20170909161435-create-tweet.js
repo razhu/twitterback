@@ -50,6 +50,12 @@ module.exports = {
         geotags: {
             type: DataTypes.TEXT,
             allowNull: true
+        },  
+        createdAt: {
+            type: DataTypes.DATE
+        },
+          updatedAt: {
+            type: DataTypes.DATE
         }
     });
   },

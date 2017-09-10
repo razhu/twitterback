@@ -47,9 +47,16 @@ module.exports = function (sequelize, DataTypes) {
   geotags: {
       type: DataTypes.TEXT,
       allowNull: true
-  }
   },
-      {
+  createdAt: {
+    type: DataTypes.DATE
+},
+  updatedAt: {
+    type: DataTypes.DATE
+}
+  },
+      {   paranoid: false,
+          freezeTableName: true,
           classMethods: {
           }
       });
