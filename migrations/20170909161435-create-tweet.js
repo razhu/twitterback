@@ -21,6 +21,10 @@ module.exports = {
             type: DataTypes.STRING(100),
             allowNull: false
         },
+        name: {
+            type: DataTypes.STRING(100),
+            allowNull: true
+        },
         date: {
             type: DataTypes.DATEONLY,
             allowNull: false
@@ -31,23 +35,21 @@ module.exports = {
         },
         likes: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            default: 0
         },
         rts: {
             type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        favourites: {
-            type: DataTypes.INTEGER,
-            allowNull: true
+            allowNull: false,
+            default: 0
         },
         hashtags: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.JSON,
             allowNull: true
         },
         geotags: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: true
         }
     });
   },

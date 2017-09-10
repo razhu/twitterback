@@ -20,15 +20,20 @@ app.get('/', function(req, res, next) {
    let myTweets = [] 
    for(let element of tweets.statuses){
         let myTweet = {}
-        myTweet.tweet_text = element.text
-        myTweet.created = element.created_at
-        myTweet.tweet_code = element.id
-        myTweet.name = element.user.name
+        myTweet.code = element.id_str
+        myTweet.text = element.text
         myTweet.username = element.user.screen_name
-        myTweet.location = element.user.location
+        myTweet.name = element.user.name
+        myTweet.date = element.user.created_at
+        myTweet.hour = element.user.created_at
+        myTweet.likes = 0 // find out how to obtain
+        myTweet.rts = 0 // find out how to obtain
+        myTweet.hashtags = element.entities.hashtags.map(x => x.text)
+        myTweet.geotags = element.geo
+
         myTweets.push(myTweet)
     }
-    res.send(tweets)
+    res.send(myTweets)
   });
 });
 // save tweets
@@ -42,7 +47,7 @@ app.post('/save', function(req, res, next) {
     })
     })
     .catch(error => {
-        console.log('error XXXXXXXXXXXXXXXXXXXXXX', error)
+        console.log("XXXXXXXXXXXX ", error)
         res.send({
             finalizado: false,
             message: error
