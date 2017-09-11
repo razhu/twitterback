@@ -4,11 +4,14 @@ var models = require('./models');
 var bodyParser = require('body-parser');
 var cors = require('cors')
 var moment = require('moment')
+var json2xls = require('json2xls');
 
 var app = express();
 
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(cors())
+app.use(json2xls.middleware);
+
 var client = new Twitter({
   consumer_key: 'Qml8euMh6wNf68yM6tzY4l6qq',
   consumer_secret: 'AMIRz4GOMK7eLr3EgT7Omxf0Xbkole0iGHozgLctQ3c8ReNPVb',
@@ -81,6 +84,14 @@ app.get('/search', function(req, res, next) {
     .catch(error => {
         res.send(error)
     })
+});
+
+// export tweets to xls
+app.post('/export', function(req, res) {
+    console.log(req.body.length)
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats');
+    res.setHeader("Content-Disposition", "attachment; filename=probando.xlsx");
+    res.xls('data.xlsx', req.body)
 });
 
 
