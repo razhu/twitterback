@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors')
 var moment = require('moment')
 var json2xls = require('json2xls');
+var fs = require('fs')
 
 var app = express();
 
@@ -87,11 +88,16 @@ app.get('/search', function(req, res, next) {
 });
 
 // export tweets to xls
-app.post('/export', function(req, res) {
-    console.log(req.body.length)
-    res.setHeader('Content-Type', 'application/vnd.openxmlformats');
-    res.setHeader("Content-Disposition", "attachment; filename=probando.xlsx");
-    res.xls('data.xlsx', req.body)
+app.get('/export', function(req, res) {
+    // console.log(req.body.length)
+    // res.setHeader('Content-Type', 'application/vnd.openxmlformats');
+    // res.setHeader("Content-Disposition", "attachment; filename=probando.xlsx");
+    // res.xls('data.xlsx', req.body)
+
+    var xls = json2xls(req.body);
+    
+    fs.writeFileSync('data.xlsx', xls, 'binary');
+
 });
 
 
