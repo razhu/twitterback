@@ -4,14 +4,14 @@ var models = require('./models');
 var bodyParser = require('body-parser');
 var cors = require('cors')
 var moment = require('moment')
-var json2xls = require('json2xls');
+var NodeXls = require('node-xls');
 var fs = require('fs')
 
 var app = express();
 
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(cors())
-app.use(json2xls.middleware);
+// app.use(json2xls.middleware);
 
 var client = new Twitter({
   consumer_key: 'Qml8euMh6wNf68yM6tzY4l6qq',
@@ -94,9 +94,10 @@ app.get('/export', function(req, res) {
     // res.setHeader("Content-Disposition", "attachment; filename=probando.xlsx");
     // res.xls('data.xlsx', req.body)
 
-    var xls = json2xls(req.body);
-    
-    fs.writeFileSync('data.xlsx', xls, 'binary');
+    var tool = new NodeXls();
+    // columns will be ordered by ["stux", "foo", "boom"]; column "boom" will be named "hello"
+    var xls = tool.json2xls(req.body, {}); 
+    fs.writeFileSync('output.xlsx', xls, 'binary');
 
 });
 
