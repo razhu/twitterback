@@ -1,0 +1,14 @@
+{
+    "tweetTitles": [
+        "Tweet",
+        "Username",
+        "Name",
+        "Date",
+        "Hour",
+        "#Likes",
+        "#RTs",
+        "Hashtags",
+        "Geotags"
+    ],
+    "documents": "/Users/ramiro/Documents/myapps/nodejs/twitter2/docs/"
+}
