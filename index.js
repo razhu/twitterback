@@ -88,13 +88,10 @@ app.get('/search', function (req, res, next) {
 });
 
 // export tweets to xls
-app.post('/export', function (req, res) {
-    // Create a new instance of a Workbook class 
-    var wb = new xl.Workbook();
-    // Add Worksheets to the workbook 
-    var ws = wb.addWorksheet('Report');
-    // Create a reusable style 
-    var style = wb.createStyle({
+app.get('/export', function (req, res) {
+    var wb = new xl.Workbook();// Create a new instance of a Workbook class 
+    var ws = wb.addWorksheet('Report');// Add Worksheets to the workbook 
+    var style = wb.createStyle({// Create a reusable style 
         font: {
             color: '#FF0800',
             size: 12
@@ -123,12 +120,5 @@ app.post('/export', function (req, res) {
         }
     });
 });
-
-// export tweets to xls
-app.get('/export', function (req, res) {
-    // Create a new instance of a Workbook class 
-    res.sendFile(rutaDocumento)
-});
-
 
 app.listen(3006);
